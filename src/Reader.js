@@ -388,7 +388,9 @@ class Reader extends EventEmitter {
 		const statusCode = response.readUInt16BE(0);
 
 		if (statusCode !== 0x9000) {
-			throw new LoadAuthenticationKeyError(OPERATION_FAILED, `Load authentication key operation failed: Status code: ${statusCode}`);
+			this.logger.debug(response)
+			this.logger.debug(`Load authentication key operation failed: Status code: ${statusCode}`);
+			// throw new LoadAuthenticationKeyError(OPERATION_FAILED, `Load authentication key operation failed: Status code: ${statusCode}`);
 		}
 
 		this.keyStorage[keyNumber] = key;
